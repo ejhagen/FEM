@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import Pet from "./Pet";
+import useBreedList from "./useBreedList";
+import Results from "./Results";
 
 const ANIMALS = ["bird", "cats", "dog", "rabbit", "reptile"];
 
@@ -7,12 +8,14 @@ const SearchParams = () => {
   const [location, setLocation] = useState("");
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
-  const breeds = [];
+  const breeds = useBreedList(animal);
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
     requestPets();
-  }, []); //eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
+  //eslint-disable-line react-hooks/exhaustive-deps
+  //move this comment onto the same line as the error to remove the linting squiggles
 
   async function requestPets() {
     const res = await fetch(
@@ -25,7 +28,12 @@ const SearchParams = () => {
 
   return (
     <div className="search-params">
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestPets();
+        }}
+      >
         <label htmlFor="location">
           Location
           <input
@@ -70,23 +78,16 @@ const SearchParams = () => {
             }}
           >
             <option />
-            {breeds.map((allBreed) => (
-              <option key={allBreed} value={allBreed}>
-                {allBreed}
+            {breeds.map((breed) => (
+              <option key={breed} value={breed}>
+                {breed}
               </option>
             ))}
           </select>
         </label>
         <button>Submit</button>
       </form>
-      {pets.map((pet) => {
-        <Pet
-          name={pet.name}
-          animal={pet.animal}
-          breed={pet.breed}
-          key={pet.id}
-        />;
-      })}
+      <Results pets={pets} />
     </div>
   );
 };
