@@ -28,6 +28,6 @@ export default function useBreedList(animal) {
       setStatus("loaded");
     }
   }, [animal]);
-  console.log("breedlist", breedList);
+  // console.log("breedlist", breedList);
   return breedList;
 }
