@@ -38,3 +38,10 @@ bad practice for production code
 es4 tried to do jsx - failed
 
 SEARCH FORM COMPONENT
+
+BrowserRouter vs HashRouter
+-remix is like a replacement for rails
+-remix is react routery rails
+-protected routes - read the docs
+
+## Class Components
