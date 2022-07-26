@@ -53,3 +53,11 @@ es4 tried to do jsx - failed
 ## Fetching Data in componentDidMount
 
 -arrow functions don't create lexical context? or do?
+
+
+## Special Case React Tools
+-error boundaries
+    - an instance might be when the user inputs markup - obv could contain errors
+    - must be a class component
+    -track.js software that catches errors for js FEM course
+    -
